@@ -66,7 +66,7 @@ public class SplashScreen extends Activity implements Invoker {
 	private void startMainActivity() {
 		
 		// Register application.
-        app.registerAppForGCM();
+        //app.registerAppForGCM();
         
 		// Initialize app...
 		if (app.isThisFirstUse()) {
