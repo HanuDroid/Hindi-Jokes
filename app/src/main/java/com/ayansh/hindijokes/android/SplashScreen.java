@@ -1,9 +1,12 @@
 package com.ayansh.hindijokes.android;
 
+import org.varunverma.CommandExecuter.Command;
+import org.varunverma.CommandExecuter.CommandExecuter;
 import org.varunverma.CommandExecuter.Invoker;
 import org.varunverma.CommandExecuter.ProgressInfo;
 import org.varunverma.CommandExecuter.ResultObject;
 import org.varunverma.hanu.Application.Application;
+import org.varunverma.hanu.Application.SaveRegIdCommand;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -38,7 +41,7 @@ public class SplashScreen extends Activity implements Invoker {
         app.setContext(getApplicationContext());
 
 		// Accept my Terms
-        app.setEULAResult(true);
+        //app.setEULAResult(true);
 		if (!app.isEULAAccepted()) {
 			
 			Intent eula = new Intent(SplashScreen.this, DisplayFile.class);
@@ -66,7 +69,34 @@ public class SplashScreen extends Activity implements Invoker {
 	private void startMainActivity() {
 		
 		// Register application.
-        //app.registerAppForGCM();
+		String regStatus = (String) app.getOptions().get("RegistrationStatus");
+		String regId = (String) app.getOptions().get("RegistrationId");
+
+		if(regId == null || regId.contentEquals("")) {
+
+			Intent intent = new Intent(this, AppRegistrationService.class);
+			startService(intent);
+
+		}
+		else{
+
+			if(regStatus == null || regStatus.contentEquals("")) {
+
+				CommandExecuter ce = new CommandExecuter();
+
+				SaveRegIdCommand command = new SaveRegIdCommand(new Invoker() {
+					public void NotifyCommandExecuted(ResultObject result) {
+					}
+
+					public void ProgressUpdate(ProgressInfo pi) {
+					}
+				}, regId);
+
+				ce.execute(command);
+
+			}
+		}
+
         
 		// Initialize app...
 		if (app.isThisFirstUse()) {
