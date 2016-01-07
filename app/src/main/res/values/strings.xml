@@ -20,4 +20,10 @@
     <string name="taxonomy_color">black</string>
     <string name="taxonomy_font">arial,helvetica,sans-serif</string>
 
+    <string name="title">Title goes here</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+    <string name="nick_name">Name</string>
+    <string name="content">Write Content here</string>
+
 </resources>

@@ -9,7 +9,7 @@
         android:title="Share">
     </item>
 
-    <item android:icon="@mipmap/help"
+    <item android:icon="@mipmap/add_content"
         android:id="@+id/Upload"
         app:showAsAction="ifRoom"
         android:title="Upload">

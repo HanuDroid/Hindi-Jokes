@@ -2,6 +2,7 @@ package com.ayansh.hindijokes.android;
 
 import org.varunverma.hanu.Application.Application;
 import org.varunverma.hanu.Application.HanuFragmentInterface;
+import org.varunverma.hanu.Application.Post;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -119,10 +121,15 @@ public class Main extends AppCompatActivity implements PostListFragment.Callback
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        int id;
+
         switch (item.getItemId()){
 
             case R.id.Help:
-                showHelp();
+                Intent help = new Intent(Main.this, DisplayFile.class);
+                help.putExtra("File", "help.html");
+                help.putExtra("Title", "Help: ");
+                Main.this.startActivity(help);
                 break;
 
             case R.id.About:
@@ -130,6 +137,43 @@ public class Main extends AppCompatActivity implements PostListFragment.Callback
                 info.putExtra("File", "about.html");
                 info.putExtra("Title", "About: ");
                 Main.this.startActivity(info);
+                break;
+
+            case R.id.Rate:
+                if(dualPane){
+                    id = fragmentUI.getSelectedItem();
+                }
+                else{
+                    id = viewPager.getCurrentItem();
+                }
+                Intent rate = new Intent(Main.this, PostRating.class);
+                rate.putExtra("PostId", id);
+                Main.this.startActivity(rate);
+                break;
+
+            case R.id.Share:
+                try{
+                    if(dualPane){
+                        id = fragmentUI.getSelectedItem();
+                    }
+                    else{
+                        id = viewPager.getCurrentItem();
+                    }
+                    Post post = app.getPostList().get(id);
+                    Intent send = new Intent(android.content.Intent.ACTION_SEND);
+                    send.setType("text/plain");
+                    send.putExtra(android.content.Intent.EXTRA_SUBJECT, post.getTitle());
+                    send.putExtra(android.content.Intent.EXTRA_TEXT, post.getContent(true));
+                    startActivity(Intent.createChooser(send, "Share with..."));
+                }catch(Exception e){
+                    Log.e(Application.TAG, e.getMessage(), e);
+                    finish();
+                }
+                break;
+
+            case R.id.Upload:
+                Intent upload = new Intent(Main.this, CreateNewPost.class);
+                Main.this.startActivity(upload);
                 break;
 
         }
@@ -155,15 +199,6 @@ public class Main extends AppCompatActivity implements PostListFragment.Callback
             postDetail.putExtra("PostId", id);
             Main.this.startActivity(postDetail);
         }
-    }
-
-    private void showHelp() {
-        // Show Help
-        //EasyTracker.getTracker().sendView("/Help");
-        Intent help = new Intent(Main.this, DisplayFile.class);
-        help.putExtra("File", "help.html");
-        help.putExtra("Title", "Help: ");
-        Main.this.startActivity(help);
     }
 
     @Override
