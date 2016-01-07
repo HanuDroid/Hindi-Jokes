@@ -3,16 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Main">
 
-    <item android:icon="@mipmap/help"
-        android:id="@+id/Help"
+    <item android:icon="@mipmap/ic_share"
+        android:id="@+id/Share"
         app:showAsAction="ifRoom"
-        android:title="Help">
+        android:title="Share">
+    </item>
+
+    <item android:icon="@mipmap/help"
+        android:id="@+id/Upload"
+        app:showAsAction="ifRoom"
+        android:title="Upload">
+    </item>
+
+    <item android:icon="@mipmap/ic_rate"
+        android:id="@+id/Rate"
+        app:showAsAction="ifRoom"
+        android:title="Rate this joke">
     </item>
 
     <item android:icon="@mipmap/about"
         android:id="@+id/About"
         app:showAsAction="ifRoom"
         android:title="About">
+    </item>
+
+    <item android:icon="@mipmap/help"
+        android:id="@+id/Help"
+        app:showAsAction="ifRoom"
+        android:title="Help">
     </item>
 
 </menu>

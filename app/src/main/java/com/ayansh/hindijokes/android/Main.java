@@ -5,29 +5,37 @@ import org.varunverma.hanu.Application.HanuFragmentInterface;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
-public class Main extends FragmentActivity implements PostListFragment.Callbacks,
+public class Main extends AppCompatActivity implements PostListFragment.Callbacks,
         PostDetailFragment.Callbacks{
 
     private boolean dualPane;
     private Application app;
     private HanuFragmentInterface fragmentUI;
     private int postId;
+    private PostPagerAdapter pagerAdapter;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
 
         if(savedInstanceState != null){
             postId = savedInstanceState.getInt("PostId");
@@ -41,6 +49,10 @@ public class Main extends FragmentActivity implements PostListFragment.Callbacks
         }
         else{
             dualPane = false;
+            FrameLayout postDetail = (FrameLayout) findViewById(R.id.post_detail);
+            if(postDetail != null){
+                postDetail.setVisibility(View.GONE);
+            }
         }
 
         // TODO Tracking.
@@ -75,26 +87,27 @@ public class Main extends FragmentActivity implements PostListFragment.Callbacks
         FragmentManager fm = this.getSupportFragmentManager();
         Fragment fragment;
 
-        // Create Post List Fragment
-        fragment = new PostListFragment();
-        Bundle arguments = new Bundle();
-        arguments.putInt("PostId", postId);
-        arguments.putBoolean("DualPane", dualPane);
-        fragment.setArguments(arguments);
-
-        if(dualPane){
-            arguments.putBoolean("ShowFirstItem", true);
+        if (dualPane) {
+            // Create Post List Fragment
+            fragment = new PostListFragment();
+            Bundle arguments = new Bundle();
+            arguments.putInt("PostId", postId);
+            //arguments.putBoolean("DualPane", dualPane);
+            //arguments.putBoolean("ShowFirstItem", true);
+            fragment.setArguments(arguments);
             fm.beginTransaction().replace(R.id.post_list, fragment).commitAllowingStateLoss();
-        }
-        else{
-            arguments.putBoolean("ShowFirstItem", false);
-            fm.beginTransaction().replace(R.id.post_detail, fragment).commitAllowingStateLoss();
-        }
 
-        fragmentUI = (HanuFragmentInterface) fragment;
+            fragmentUI = (HanuFragmentInterface) fragment;
+
+        } else {
+            // Create view Pager
+            viewPager = (ViewPager) findViewById(R.id.post_pager);
+
+            pagerAdapter = new PostPagerAdapter(getSupportFragmentManager(),app.getPostList().size());
+            viewPager.setAdapter(pagerAdapter);
+        }
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

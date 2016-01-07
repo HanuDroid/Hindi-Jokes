@@ -5,12 +5,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
-public class PostDetailActivity extends FragmentActivity implements
+public class PostDetailActivity extends AppCompatActivity implements
 		PostDetailFragment.Callbacks {
 
 	@Override
@@ -18,6 +21,15 @@ public class PostDetailActivity extends FragmentActivity implements
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+		setSupportActionBar(myToolbar);
+
+		// Get a support ActionBar corresponding to this toolbar
+		ActionBar ab = getSupportActionBar();
+
+		// Enable the Up button
+		ab.setDisplayHomeAsUpEnabled(true);
 
 		// Hide some views
 		View postList = findViewById(R.id.post_list);
@@ -31,6 +43,9 @@ public class PostDetailActivity extends FragmentActivity implements
 				.addTestDevice("9F11CAC92EB404500CAA3F8B0BBA5277").build();
 
 		AdView adView = (AdView) findViewById(R.id.adView);
+
+		// Start loading the ad in the background.
+		adView.loadAd(adRequest);
 
 		Intent intent = getIntent();
 		int postId = intent.getIntExtra("PostId", 0);

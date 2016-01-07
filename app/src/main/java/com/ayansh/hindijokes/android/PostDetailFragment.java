@@ -22,6 +22,8 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
+import java.text.SimpleDateFormat;
+
 
 public class PostDetailFragment extends Fragment implements HanuFragmentInterface, HanuGestureListener{
 
@@ -141,8 +143,10 @@ public class PostDetailFragment extends Fragment implements HanuFragmentInterfac
 	}
 
 	static String getHTMLCode(Post post) {
+
+		SimpleDateFormat df = new SimpleDateFormat();
+
 		// Create HTML Code.
-		
 		String html = "<html>" +
 				
 				// HTML HEAD
@@ -152,12 +156,16 @@ public class PostDetailFragment extends Fragment implements HanuFragmentInterfac
 				"<script type=\"text/javascript\">" +
 				"function loadPosts(taxonomy,name){Main.loadPosts(taxonomy,name);}" +
 				"</script>" +
-				
+
 				// CSS
 				"<style>" +
-				"h2 {color:blue; font-family:arial,helvetica,sans-serif; text-align:center; font-size:30px;}" +
-				"#content {color:black; font-family:arial,helvetica,sans-serif; font-size:26px;}" +
-				"#footer {color:blue; font-family:verdana,geneva,sans-serif; font-size:12px;}" +
+				"h3 {color:blue;font-family:arial,helvetica,sans-serif;}" +
+				"#pub_date {color:black;font-family:verdana,geneva,sans-serif;font-size:14px;}" +
+				"#content {color:black;font-family:arial,helvetica,sans-serif; font-size:18px;}" +
+				".taxonomy {color:black;font-family:arial,helvetica,sans-serif; font-size:14px;}" +
+				"#comments {color:black;font-family:arial,helvetica,sans-serif; font-size:16px;}" +
+				"#ratings {color:black; font-family:verdana,geneva,sans-serif; font-size:14px;}" +
+				"#footer {color:#0000ff; font-family:verdana,geneva,sans-serif; font-size:14px;}"+
 				"</style>" +
 				
 				"</head>" +
@@ -166,19 +174,37 @@ public class PostDetailFragment extends Fragment implements HanuFragmentInterfac
 				"<body>" +
 				
 				// Heading
-				"<h2>" + post.getTitle() + "</h2>" +
-				
+				"<h3>" + post.getTitle() + "</h3>" +
+
+				// Pub Date
+				"<div id=\"pub_date\">" + df.format(post.getPublishDate()) + "</div>" +
+				"<hr />" +
+
 				// Content
-				"<div id=\"content\">" +
-				post.getContent(false) +
-				"</div>" +
-				
-				// Footer
-				"<br /><hr />" +
-				"<div id=\"footer\">" +
-				"Powered by <a href=\"http://hanu-droid.varunverma.org\">Hanu-Droid framework</a>" +
-				"</div>" +
-				
+				"<div id=\"content\">" + post.getContent(false) + "</div>" +
+				"<hr />" +
+
+				// Author
+				"<div class=\"taxonomy\">" +
+				"by <a href=\"javascript:loadPosts('author','" + post.getAuthor() + "')\">" + post.getAuthor() + "</a>" +
+				"</div>";
+
+		// Ratings
+		if (post.getMetaData().size() > 0
+				&& !post.getMetaData().get("ratings_users").contentEquals("0")) {
+			// We have some ratings !
+			html = html + "<div id=\"ratings\">" + "<br>Rating: "
+					+ String.format("%.2g%n", Float.valueOf(post.getMetaData().get("ratings_average")))
+					+ " / 5 (by " + post.getMetaData().get("ratings_users") + " users)";
+
+			html = html + "</div>";
+		}
+
+		// Footer
+		html = html + "<br /><hr />" + "<div id=\"footer\">"
+				+ "Powered by <a href=\"http://hanu-droid.varunverma.org\">Hanu-Droid framework</a>"
+				+ "</div>" +
+
 				"</body>" +
 				"</html>";
 		

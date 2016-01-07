@@ -14,6 +14,9 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.webkit.JavascriptInterface;
@@ -24,7 +27,7 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
-public class DisplayFile extends Activity {
+public class DisplayFile extends AppCompatActivity {
 	
 	private String html_text;
 	private WebView my_web_view;
@@ -35,7 +38,16 @@ public class DisplayFile extends Activity {
     public void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);       
-        setContentView(R.layout.post_detail);
+        setContentView(R.layout.display_file);
+
+		Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+		setSupportActionBar(myToolbar);
+
+		// Get a support ActionBar corresponding to this toolbar
+		ActionBar ab = getSupportActionBar();
+
+		// Enable the Up button
+		ab.setDisplayHomeAsUpEnabled(true);
         
         my_web_view = (WebView) findViewById(R.id.webview);
         WebSettings webSettings = my_web_view.getSettings();
