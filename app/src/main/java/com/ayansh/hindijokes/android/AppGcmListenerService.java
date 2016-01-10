@@ -1,5 +1,6 @@
 package com.ayansh.hindijokes.android;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import org.varunverma.hanu.Application.HanuGCMListenerService;
@@ -19,7 +20,7 @@ public class AppGcmListenerService extends HanuGCMListenerService {
 		}
 		else{
 
-			processMessage(this, from, data);
+			super.processMessage(from, data);
 		}
 
 
