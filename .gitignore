@@ -1,8 +1,11 @@
-/.idea/workspace.xml
-/.idea/libraries
+.idea/
+.idea/*
 .DS_Store
 /build
 app/build
+app/app.iml
+*.gradle
+gradle*
 
 # Built application files
 *.apk
