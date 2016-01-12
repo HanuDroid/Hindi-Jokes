@@ -57,11 +57,6 @@ public class Main extends AppCompatActivity implements PostListFragment.Callback
             }
         }
 
-        // TODO Tracking.
-        // https://developers.google.com/cloud-messaging/android/client?configured=true
-        // https://developers.google.com/analytics/devguides/collection/android/v4/start?configured=true
-        // https://developers.google.com/admob/android/app?configured=true
-
         // Get Application Instance.
         app = Application.getApplicationInstance();
 
