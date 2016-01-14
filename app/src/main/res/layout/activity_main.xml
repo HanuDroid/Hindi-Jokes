@@ -32,6 +32,9 @@
         android:layout_height="match_parent"
         android:layout_above="@id/adView" />
 
+    <include layout="@layout/swipe_help"
+        android:id="@+id/swipe_help" />
+
     <FrameLayout
         android:id="@+id/post_detail"
         android:layout_above="@id/adView"

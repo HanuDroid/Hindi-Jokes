@@ -15,7 +15,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -62,6 +65,46 @@ public class Main extends AppCompatActivity implements PostListFragment.Callback
 
         // Start the Main Activity
         startMainScreen();
+
+        // Show Swipe Help
+        showSwipeHelp();
+
+    }
+
+    private void showSwipeHelp(){
+
+        final LinearLayout swipeHelpLayout = (LinearLayout) findViewById(R.id.swipe_help);
+
+        if(swipeHelpLayout == null){
+            return;
+        }
+
+        String swipeHelp = app.getOptions().get("SwipeHelp");
+
+        if(swipeHelp != null && swipeHelp.contentEquals("Skip")){
+            // Skip the swipe help
+            swipeHelpLayout.setVisibility(View.GONE);
+        }
+        else{
+
+            final CheckBox showHelpAgain = (CheckBox) swipeHelpLayout.findViewById(R.id.show_again);
+
+            Button dismissHelp = (Button) swipeHelpLayout.findViewById(R.id.dismiss_help);
+            dismissHelp.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+                    // Hide the swipe help
+                    swipeHelpLayout.setVisibility(View.GONE);
+
+                    if(showHelpAgain.isChecked()){
+                        Application.getApplicationInstance().addParameter("SwipeHelp", "Skip");
+                    }
+                }
+            });
+
+        }
+
     }
 
     private void startMainScreen() {
