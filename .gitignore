@@ -1,5 +1,6 @@
 .idea/
 .idea/*
+.idea/*.*
 .DS_Store
 /build
 app/build
@@ -35,3 +36,6 @@ proguard/
 
 # Log Files
 *.log
+
+#IML Files
+*.iml

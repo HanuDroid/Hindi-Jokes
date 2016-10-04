@@ -8,8 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
 
-import org.varunverma.CommandExecuter.ResultObject;
-import org.varunverma.hanu.Application.HanuGCMListenerService;
+import com.ayansh.CommandExecuter.ResultObject;
+import com.ayansh.hanudroid.HanuGCMListenerService;
 
 import java.util.ArrayList;
 import java.util.Iterator;

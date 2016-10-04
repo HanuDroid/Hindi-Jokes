@@ -1,13 +1,5 @@
 package com.ayansh.hindijokes.android;
 
-import org.varunverma.CommandExecuter.Command;
-import org.varunverma.CommandExecuter.CommandExecuter;
-import org.varunverma.CommandExecuter.Invoker;
-import org.varunverma.CommandExecuter.ProgressInfo;
-import org.varunverma.CommandExecuter.ResultObject;
-import org.varunverma.hanu.Application.Application;
-import org.varunverma.hanu.Application.SaveRegIdCommand;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -17,6 +9,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.TextView;
+
+import com.ayansh.CommandExecuter.CommandExecuter;
+import com.ayansh.CommandExecuter.Invoker;
+import com.ayansh.CommandExecuter.ProgressInfo;
+import com.ayansh.CommandExecuter.ResultObject;
+import com.ayansh.hanudroid.Application;
+import com.ayansh.hanudroid.SaveRegIdCommand;
 
 public class SplashScreen extends Activity implements Invoker {
 	
@@ -133,6 +132,9 @@ public class SplashScreen extends Activity implements Invoker {
 				showNewFeatures = true;
 				app.updateVersion();
 			}
+
+			// Now start the app.
+			startApp();
 		}
 
 	}

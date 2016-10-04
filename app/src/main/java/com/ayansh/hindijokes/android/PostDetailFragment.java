@@ -1,10 +1,5 @@
 package com.ayansh.hindijokes.android;
 
-import org.varunverma.hanu.Application.Application;
-import org.varunverma.hanu.Application.HanuFragmentInterface;
-import org.varunverma.hanu.Application.HanuGestureAnalyzer;
-import org.varunverma.hanu.Application.HanuGestureListener;
-import org.varunverma.hanu.Application.Post;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -22,10 +17,16 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
+import com.ayansh.hanudroid.Application;
+import com.ayansh.hanudroid.HanuFragmentInterface;
+import com.ayansh.hanudroid.HanuGestureAnalyzer;
+import com.ayansh.hanudroid.HanuGestureListener;
+import com.ayansh.hanudroid.Post;
+
 import java.text.SimpleDateFormat;
 
 
-public class PostDetailFragment extends Fragment implements HanuFragmentInterface, HanuGestureListener{
+public class PostDetailFragment extends Fragment implements HanuFragmentInterface, HanuGestureListener {
 
 	private Post post;
 	private WebView wv;

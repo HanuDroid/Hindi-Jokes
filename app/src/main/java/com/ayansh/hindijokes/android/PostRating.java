@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.RatingBar;
 
-import org.varunverma.hanu.Application.Application;
-import org.varunverma.hanu.Application.Post;
+import com.ayansh.hanudroid.Application;
+import com.ayansh.hanudroid.Post;
 
 /**
  * Created by varun on 1/7/16.

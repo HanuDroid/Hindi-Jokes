@@ -1,7 +1,6 @@
 package com.ayansh.hindijokes.android;
 
-import org.varunverma.hanu.Application.HanuInstanceIDListenerService;
-
+import com.ayansh.hanudroid.HanuInstanceIDListenerService;
 
 public class AppInstanceIDService extends HanuInstanceIDListenerService {
 

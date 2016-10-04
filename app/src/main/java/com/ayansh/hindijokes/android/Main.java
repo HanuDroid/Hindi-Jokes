@@ -1,9 +1,5 @@
 package com.ayansh.hindijokes.android;
 
-import org.varunverma.hanu.Application.Application;
-import org.varunverma.hanu.Application.HanuFragmentInterface;
-import org.varunverma.hanu.Application.Post;
-
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -20,6 +16,9 @@ import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import com.ayansh.hanudroid.Application;
+import com.ayansh.hanudroid.HanuFragmentInterface;
+import com.ayansh.hanudroid.Post;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
@@ -62,6 +61,7 @@ public class Main extends AppCompatActivity implements PostListFragment.Callback
 
         // Get Application Instance.
         app = Application.getApplicationInstance();
+        app.setContext(this);
 
         // Start the Main Activity
         startMainScreen();
@@ -198,10 +198,12 @@ public class Main extends AppCompatActivity implements PostListFragment.Callback
                         id = viewPager.getCurrentItem();
                     }
                     Post post = app.getPostList().get(id);
+                    String post_content = post.getContent(true);
+                    post_content += "\n\n via ~ ayansh.com/hj";
                     Intent send = new Intent(android.content.Intent.ACTION_SEND);
                     send.setType("text/plain");
                     send.putExtra(android.content.Intent.EXTRA_SUBJECT, post.getTitle());
-                    send.putExtra(android.content.Intent.EXTRA_TEXT, post.getContent(true));
+                    send.putExtra(android.content.Intent.EXTRA_TEXT, post_content);
                     startActivity(Intent.createChooser(send, "Share with..."));
                 }catch(Exception e){
                     Log.e(Application.TAG, e.getMessage(), e);

@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.varunverma.hanu.Application.Application;
 
 import android.app.Activity;
 import android.content.res.Configuration;
@@ -24,6 +23,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Toast;
 
+import com.ayansh.hanudroid.Application;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
