@@ -270,7 +270,9 @@ public class Main extends AppCompatActivity implements PostListFragment.Callback
 
         this.runOnUiThread(new Runnable() {
             public void run(){
-                fragmentUI.reloadUI();
+                if(fragmentUI != null) {
+                    fragmentUI.reloadUI();
+                }
             }
         });
     }
