@@ -16,6 +16,7 @@ import com.ayansh.CommandExecuter.ProgressInfo;
 import com.ayansh.CommandExecuter.ResultObject;
 import com.ayansh.hanudroid.Application;
 import com.ayansh.hanudroid.SaveRegIdCommand;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class SplashScreen extends Activity implements Invoker {
 	
@@ -24,6 +25,7 @@ public class SplashScreen extends Activity implements Invoker {
 	private boolean appStarted = false;
 	private boolean firstUse = false;
 	private boolean showNewFeatures = false;
+	private FirebaseAnalytics mFirebaseAnalytics;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,9 @@ public class SplashScreen extends Activity implements Invoker {
         
         // Set the context of the application
         app.setContext(getApplicationContext());
+
+		// Obtain the FirebaseAnalytics instance.
+		mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
 		// Accept my Terms
         //app.setEULAResult(true);
@@ -71,13 +76,7 @@ public class SplashScreen extends Activity implements Invoker {
 		String regStatus = (String) app.getOptions().get("RegistrationStatus");
 		String regId = (String) app.getOptions().get("RegistrationId");
 
-		if(regId == null || regId.contentEquals("")) {
-
-			Intent intent = new Intent(this, AppRegistrationService.class);
-			startService(intent);
-
-		}
-		else{
+		if(regId != null && !regId.contentEquals("")) {
 
 			if(regStatus == null || regStatus.contentEquals("")) {
 

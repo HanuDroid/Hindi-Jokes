@@ -1,8 +1,9 @@
 package com.ayansh.hindijokes.android;
 
-import com.ayansh.hanudroid.HanuInstanceIDListenerService;
 
-public class AppInstanceIDService extends HanuInstanceIDListenerService {
+import com.ayansh.hanudroid.HanuInstanceIDService;
+
+public class AppInstanceIDService extends HanuInstanceIDService {
 
     @Override
     public void onTokenRefresh() {
