@@ -26,13 +26,14 @@ import android.widget.Toast;
 import com.ayansh.hanudroid.Application;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 public class DisplayFile extends AppCompatActivity {
 	
 	private String html_text;
 	private WebView my_web_view;
-	private AdView adView;
 	Application app = Application.getApplicationInstance();
+	private boolean show_ad = false;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class DisplayFile extends AppCompatActivity {
        	if(fileName != null){
        		// If File name was provided, show from file name.
        		getHTMLFromFile(fileName);
+			show_ad = true;
        	}
        	else{
        		// Else, show data directly.
@@ -83,9 +85,11 @@ public class DisplayFile extends AppCompatActivity {
 	
 	@Override
 	protected void onDestroy(){
-		if (adView != null) {
-			adView.destroy();
+
+		if(show_ad){
+			showInterstitialAd();
 		}
+
 		super.onDestroy();
 	}
 
@@ -131,6 +135,14 @@ public class DisplayFile extends AppCompatActivity {
 	        
 		} catch (IOException e) {
 			Log.e(Application.TAG, e.getMessage(), e);
+		}
+	}
+
+	private void showInterstitialAd(){
+
+		InterstitialAd iad = MyInterstitialAd.getInterstitialAd(this);
+		if(iad.isLoaded()){
+			iad.show();
 		}
 	}
 

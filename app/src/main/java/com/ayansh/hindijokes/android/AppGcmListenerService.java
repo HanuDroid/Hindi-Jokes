@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.support.v7.app.NotificationCompat;
 
 import com.ayansh.CommandExecuter.ResultObject;
+import com.ayansh.hanudroid.Application;
 import com.ayansh.hanudroid.HanuFCMMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -49,33 +50,52 @@ public class AppGcmListenerService extends HanuFCMMessagingService {
 		}
 		int id = Integer.valueOf(mid);
 
-		NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		String min_version = data.get("min_version");
+		String max_version = data.get("max_version");
 
-		// Create Intent and Set Extras
-		Intent notificationIntent = new Intent(this, DisplayFile.class);
+		int min_v, max_v;
+		int current_version = Application.getApplicationInstance().getCurrentAppVersionCode();
 
-		notificationIntent.putExtra("Title", "Info:");
-		notificationIntent.putExtra("Subject", subject);
-		notificationIntent.putExtra("Content", content);
-		notificationIntent.addCategory(subject);
+		try{
+			min_v = Integer.valueOf(min_version);
+			max_v = Integer.valueOf(max_version);
+		}
+		catch(Exception ex){
+			min_v = 0;
+			max_v = current_version;
+		}
 
-		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+		if(min_v <= current_version && current_version <= max_v){
 
-		Notification notification = new NotificationCompat.Builder(this)
-				.setContentTitle(subject)
-				.setContentText(content)
-				.setSmallIcon(R.mipmap.ic_launcher)
-				.setContentIntent(pendingIntent).build();
+			NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-		notification.icon = R.mipmap.ic_launcher;
-		notification.tickerText = subject;
-		notification.when = System.currentTimeMillis();
+			// Create Intent and Set Extras
+			Intent notificationIntent = new Intent(this, DisplayFile.class);
 
-		notification.flags |= Notification.FLAG_AUTO_CANCEL;
-		notification.defaults |= Notification.DEFAULT_SOUND;
-		notification.defaults |= Notification.DEFAULT_VIBRATE;
+			notificationIntent.putExtra("Title", "Info:");
+			notificationIntent.putExtra("Subject", subject);
+			notificationIntent.putExtra("Content", content);
+			notificationIntent.addCategory(subject);
 
-		nm.notify(id, notification);
+			PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+
+			Notification notification = new NotificationCompat.Builder(this)
+					.setContentTitle(subject)
+					.setContentText(content)
+					.setSmallIcon(R.mipmap.ic_launcher)
+					.setContentIntent(pendingIntent).build();
+
+			notification.icon = R.mipmap.ic_launcher;
+			notification.tickerText = subject;
+			notification.when = System.currentTimeMillis();
+
+			notification.flags |= Notification.FLAG_AUTO_CANCEL;
+			notification.defaults |= Notification.DEFAULT_SOUND;
+			notification.defaults |= Notification.DEFAULT_VIBRATE;
+
+			nm.notify(id, notification);
+
+		}
 	}
 
 	private void createNotification(ResultObject result) {

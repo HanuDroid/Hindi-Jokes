@@ -120,6 +120,10 @@ public class Main extends AppCompatActivity implements PostListFragment.Callback
         // Start loading the ad in the background.
         adView.loadAd(adRequest);
 
+        // Request InterstitialAd
+        MyInterstitialAd.getInterstitialAd(this);
+        MyInterstitialAd.requestNewInterstitial();
+
         // Load Posts.
         Application.getApplicationInstance().getAllPosts();
 
