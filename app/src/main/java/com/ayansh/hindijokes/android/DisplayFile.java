@@ -67,7 +67,11 @@ public class DisplayFile extends AppCompatActivity {
        	if(fileName != null){
        		// If File name was provided, show from file name.
        		getHTMLFromFile(fileName);
-			show_ad = true;
+
+			if(fileName.contains("about")){
+				show_ad = true;
+			}
+
        	}
        	else{
        		// Else, show data directly.

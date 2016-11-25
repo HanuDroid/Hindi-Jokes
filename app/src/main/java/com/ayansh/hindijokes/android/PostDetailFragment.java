@@ -67,7 +67,7 @@ public class PostDetailFragment extends Fragment implements HanuFragmentInterfac
 			if (getArguments().containsKey("PostId")) {
 				int index = getArguments().getInt("PostId");
 	        	if(index >= app.getPostList().size()){
-	        		index = app.getPostList().size();
+	        		index = app.getPostList().size() - 1;
 	        	}
 	            post = app.getPostList().get(index);
 	        }
