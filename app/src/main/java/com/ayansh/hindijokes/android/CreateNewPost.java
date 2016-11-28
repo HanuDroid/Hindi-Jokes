@@ -19,6 +19,7 @@ import com.ayansh.CommandExecuter.ResultObject;
 import com.ayansh.hanudroid.Application;
 import com.ayansh.hanudroid.CreateNewPostCommand;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 
 /**
@@ -107,6 +108,11 @@ public class CreateNewPost extends AppCompatActivity implements View.OnClickList
         pd = ProgressDialog.show(this, "Uploading Joke", "Uploading new joke, please wait...");
 
         ce.execute(command);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("action", "joke_upload");
+        Application.getApplicationInstance().getFirebaseAnalytics().logEvent("joke_upload", bundle);
+
     }
 
     @Override

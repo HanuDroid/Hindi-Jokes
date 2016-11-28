@@ -21,6 +21,9 @@ public class AppGcmListenerService extends HanuFCMMessagingService {
 	@Override
 	public void onMessageReceived(RemoteMessage remoteMessage) {
 
+		// Be Safe. Set Context.
+		Application.getApplicationInstance().setContext(getApplicationContext());
+
 		String message = remoteMessage.getData().get("message");
 
 		if(message.contentEquals("InfoMessage")){

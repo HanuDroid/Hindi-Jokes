@@ -21,6 +21,7 @@ import com.ayansh.hanudroid.HanuFragmentInterface;
 import com.ayansh.hanudroid.Post;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class Main extends AppCompatActivity implements PostListFragment.Callbacks,
         PostDetailFragment.Callbacks{
@@ -209,6 +210,12 @@ public class Main extends AppCompatActivity implements PostListFragment.Callback
                     send.putExtra(android.content.Intent.EXTRA_SUBJECT, post.getTitle());
                     send.putExtra(android.content.Intent.EXTRA_TEXT, post_content);
                     startActivity(Intent.createChooser(send, "Share with..."));
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString(FirebaseAnalytics.Param.ITEM_ID, post.getTitle());
+                    bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "joke_share");
+                    app.getFirebaseAnalytics().logEvent(FirebaseAnalytics.Event.SHARE, bundle);
+
                 }catch(Exception e){
                     Log.e(Application.TAG, e.getMessage(), e);
                     finish();

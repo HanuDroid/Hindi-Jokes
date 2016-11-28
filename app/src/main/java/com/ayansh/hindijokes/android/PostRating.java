@@ -9,6 +9,7 @@ import android.widget.RatingBar;
 
 import com.ayansh.hanudroid.Application;
 import com.ayansh.hanudroid.Post;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 /**
  * Created by varun on 1/7/16.
@@ -44,6 +45,10 @@ public class PostRating extends Activity implements RatingBar.OnRatingBarChangeL
         ratingBar.setNumStars(5);
         ratingBar.setRating(post.getMyRating());
         ratingBar.setOnRatingBarChangeListener(this);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("post_id", post.getTitle());
+        Application.getApplicationInstance().getFirebaseAnalytics().logEvent("post_rating", bundle);
 
     }
 
