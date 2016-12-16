@@ -24,6 +24,10 @@
     <string name="show_help_again">Don\'t show this again</string>
     <string name="ok_got_it">OK. Got it !</string>
 
+    <string name="show_memes">Subscribe to Memes</string>
+    <string name="show_memes_help">Memes are Jokes with Images.
+        Memes will be deleted automatically after 7 days to optimize storage space</string>
+
     <string name="title">Title goes here</string>
     <string name="submit">Submit</string>
     <string name="cancel">Cancel</string>

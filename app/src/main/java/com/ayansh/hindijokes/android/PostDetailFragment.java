@@ -4,6 +4,7 @@ package com.ayansh.hindijokes.android;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.ImageView;
 
 import com.ayansh.hanudroid.Application;
 import com.ayansh.hanudroid.HanuFragmentInterface;
@@ -23,6 +25,7 @@ import com.ayansh.hanudroid.HanuGestureAnalyzer;
 import com.ayansh.hanudroid.HanuGestureListener;
 import com.ayansh.hanudroid.Post;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 
 
@@ -30,6 +33,7 @@ public class PostDetailFragment extends Fragment implements HanuFragmentInterfac
 
 	private Post post;
 	private WebView wv;
+	private ImageView iv;
 	private Callbacks activity = sDummyCallbacks;
 	private int position;
 	private Application app;
@@ -64,8 +68,8 @@ public class PostDetailFragment extends Fragment implements HanuFragmentInterfac
 		}
 		
 		if(getArguments() != null){
-			if (getArguments().containsKey("PostId")) {
-				int index = getArguments().getInt("PostId");
+			if (getArguments().containsKey("PostIndex")) {
+				int index = getArguments().getInt("PostIndex");
 	        	if(index >= app.getPostList().size()){
 	        		index = app.getPostList().size() - 1;
 	        	}
@@ -82,6 +86,7 @@ public class PostDetailFragment extends Fragment implements HanuFragmentInterfac
 		View rootView = inflater.inflate(R.layout.post_detail, container, false);
 		
 		wv = (WebView) rootView.findViewById(R.id.webview);
+		iv = (ImageView) rootView.findViewById(R.id.image_view);
 		
 		WebSettings webSettings = wv.getSettings();
 		webSettings.setJavaScriptEnabled(true);
@@ -133,13 +138,26 @@ public class PostDetailFragment extends Fragment implements HanuFragmentInterfac
 	}
 
 	private void showPost() {
-		
-		String html = "";
-		if(post != null){
-			html = getHTMLCode(post);
-			//EasyTracker.getTracker().sendView("/Post/" + post.getTitle());
+
+		boolean isMeme = post.hasCategory("Meme");
+		if(isMeme){
+
+			File image_folder = new File(app.getFilesDirectory(),String.valueOf(post.getId()));
+			File[] file_list = image_folder.listFiles();
+			File image_file = file_list[0];
+			Uri image_uri = Uri.fromFile(image_file);
+			wv.setVisibility(View.GONE);
+			iv.setImageURI(image_uri);
 		}
-		wv.loadDataWithBaseURL("fake://not/needed", html, "text/html", "UTF-8", "");
+		else{
+
+			iv.setVisibility(View.GONE);
+			String html = "";
+			if(post != null){
+				html = getHTMLCode(post);
+			}
+			wv.loadDataWithBaseURL("fake://not/needed", html, "text/html", "UTF-8", "");
+		}
 		
 	}
 

@@ -28,13 +28,13 @@ public class PostPagerAdapter extends FragmentStatePagerAdapter {
     }
 
     @Override
-    public Fragment getItem(int postId) {
+    public Fragment getItem(int PostIndex) {
 
         // Post Id is actually position
 
         Fragment fragment = new PostDetailFragment();
         Bundle arguments = new Bundle();
-        arguments.putInt("PostId", postId);
+        arguments.putInt("PostIndex", PostIndex);
         fragment.setArguments(arguments);
 
         return fragment;

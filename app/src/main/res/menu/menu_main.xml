@@ -21,6 +21,12 @@
         android:title="Rate this joke">
     </item>
 
+    <item android:icon="@android:drawable/ic_menu_preferences"
+        android:id="@+id/Settings"
+        app:showAsAction="ifRoom"
+        android:title="Settings">
+    </item>
+
     <item android:icon="@mipmap/about"
         android:id="@+id/About"
         app:showAsAction="ifRoom"

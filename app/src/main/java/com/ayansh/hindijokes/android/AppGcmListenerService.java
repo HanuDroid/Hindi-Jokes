@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.NotificationCompat;
 
+import com.ayansh.CommandExecuter.Invoker;
+import com.ayansh.CommandExecuter.ProgressInfo;
 import com.ayansh.CommandExecuter.ResultObject;
 import com.ayansh.hanudroid.Application;
 import com.ayansh.hanudroid.HanuFCMMessagingService;
@@ -35,6 +37,10 @@ public class AppGcmListenerService extends HanuFCMMessagingService {
 			ResultObject result = processMessage(remoteMessage);
 			if (result.getData().getBoolean("ShowNotification")) {
 				createNotification(result);
+			}
+
+			if(message.contentEquals("PerformSync")){
+				deleteOldPosts();
 			}
 		}
 
@@ -148,5 +154,18 @@ public class AppGcmListenerService extends HanuFCMMessagingService {
 
 		nm.notify(1, notification);
 
+	}
+
+	private void deleteOldPosts(){
+
+		DeleteOldPostsCommand command = new DeleteOldPostsCommand(new Invoker() {
+			@Override
+			public void NotifyCommandExecuted(ResultObject resultObject) {}
+
+			@Override
+			public void ProgressUpdate(ProgressInfo progressInfo) {}
+			});
+
+		command.execute();
 	}
 }

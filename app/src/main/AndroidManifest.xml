@@ -36,6 +36,15 @@
         </activity>
 
         <activity
+            android:name=".Eula"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_main" >
+            <intent-filter>
+                <action android:name="android.intent.action.EULA" />
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name=".DisplayFile"
             android:configChanges="orientation|keyboardHidden"
             android:exported="false"
@@ -95,6 +104,25 @@
                 <data android:mimeType="text/*" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.PREFERENCES" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:authorities="com.ayansh.hindijokes.android"
+            android:name="android.support.v4.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
 
         <service
             android:name="com.ayansh.hindijokes.android.AppGcmListenerService"
