@@ -139,23 +139,34 @@ public class PostDetailFragment extends Fragment implements HanuFragmentInterfac
 
 	private void showPost() {
 
+		if(post == null){
+			return;
+		}
+
 		boolean isMeme = post.hasCategory("Meme");
 		if(isMeme){
 
-			File image_folder = new File(app.getFilesDirectory(),String.valueOf(post.getId()));
-			File[] file_list = image_folder.listFiles();
-			File image_file = file_list[0];
-			Uri image_uri = Uri.fromFile(image_file);
-			wv.setVisibility(View.GONE);
-			iv.setImageURI(image_uri);
+			try{
+				File image_folder = new File(app.getFilesDirectory(),String.valueOf(post.getId()));
+				File[] file_list = image_folder.listFiles();
+				File image_file = file_list[0];
+				Uri image_uri = Uri.fromFile(image_file);
+				wv.setVisibility(View.GONE);
+				iv.setImageURI(image_uri);
+			}
+			catch(Exception e){
+
+				iv.setVisibility(View.GONE);
+				String html = getHTMLCode(post);
+				wv.loadDataWithBaseURL("fake://not/needed", html, "text/html", "UTF-8", "");
+
+			}
+
 		}
 		else{
 
 			iv.setVisibility(View.GONE);
-			String html = "";
-			if(post != null){
-				html = getHTMLCode(post);
-			}
+			String html = getHTMLCode(post);
 			wv.loadDataWithBaseURL("fake://not/needed", html, "text/html", "UTF-8", "");
 		}
 		
