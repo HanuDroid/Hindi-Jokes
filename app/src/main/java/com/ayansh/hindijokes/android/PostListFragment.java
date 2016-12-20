@@ -56,8 +56,8 @@ public class PostListFragment extends ListFragment implements HanuFragmentInterf
         Application app = Application.getApplicationInstance();
         
         if(getArguments() != null){
-			if (getArguments().containsKey("PostId")) {
-				selection = getArguments().getInt("PostId");
+			if (getArguments().containsKey("PostIndex")) {
+				selection = getArguments().getInt("PostIndex");
 	        	if(selection > app.getPostList().size()){
 	        		selection = app.getPostList().size();
 	        	}

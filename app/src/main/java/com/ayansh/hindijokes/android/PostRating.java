@@ -9,7 +9,6 @@ import android.widget.RatingBar;
 
 import com.ayansh.hanudroid.Application;
 import com.ayansh.hanudroid.Post;
-import com.google.firebase.analytics.FirebaseAnalytics;
 
 /**
  * Created by varun on 1/7/16.
@@ -26,10 +25,10 @@ public class PostRating extends Activity implements RatingBar.OnRatingBarChangeL
         setContentView(R.layout.rate);
 
         Intent intent = getIntent();
-        int postId = intent.getIntExtra("PostId", 0);
+        int postIndex = intent.getIntExtra("PostIndex", 0);
 
         try{
-            post = Application.getApplicationInstance().getPostList().get(postId);
+            post = Application.getApplicationInstance().getPostList().get(postIndex);
         }catch (Exception e){
             Log.e(Application.TAG, e.getMessage(), e);
             finish();

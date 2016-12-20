@@ -34,7 +34,7 @@ public class Main extends AppCompatActivity implements PostListFragment.Callback
     private boolean dualPane;
     private Application app;
     private HanuFragmentInterface fragmentUI;
-    private int postId;
+    private int postIndex;
     private PostPagerAdapter pagerAdapter;
     private ViewPager viewPager;
 
@@ -48,10 +48,10 @@ public class Main extends AppCompatActivity implements PostListFragment.Callback
         setSupportActionBar(myToolbar);
 
         if(savedInstanceState != null){
-            postId = savedInstanceState.getInt("PostId");
+            postIndex = savedInstanceState.getInt("PostIndex");
         }
         else{
-            postId = 0;
+            postIndex = 0;
         }
 
         if (findViewById(R.id.post_list) != null) {
@@ -141,7 +141,7 @@ public class Main extends AppCompatActivity implements PostListFragment.Callback
             // Create Post List Fragment
             fragment = new PostListFragment();
             Bundle arguments = new Bundle();
-            arguments.putInt("PostId", postId);
+            arguments.putInt("PostIndex", postIndex);
             //arguments.putBoolean("DualPane", dualPane);
             //arguments.putBoolean("ShowFirstItem", true);
             fragment.setArguments(arguments);
@@ -180,6 +180,13 @@ public class Main extends AppCompatActivity implements PostListFragment.Callback
                 Main.this.startActivity(help);
                 break;
 
+            case R.id.ShowEula:
+                Intent eula = new Intent(Main.this, DisplayFile.class);
+                eula.putExtra("File", "eula.html");
+                eula.putExtra("Title", "Terms and Conditions: ");
+                Main.this.startActivity(eula);
+                break;
+
             case R.id.Settings:
                 Intent settings = new Intent(Main.this, SettingsActivity.class);
                 Main.this.startActivity(settings);
@@ -200,7 +207,7 @@ public class Main extends AppCompatActivity implements PostListFragment.Callback
                     id = viewPager.getCurrentItem();
                 }
                 Intent rate = new Intent(Main.this, PostRating.class);
-                rate.putExtra("PostId", id);
+                rate.putExtra("PostIndex", id);
                 Main.this.startActivity(rate);
                 break;
 
@@ -267,7 +274,7 @@ public class Main extends AppCompatActivity implements PostListFragment.Callback
 
         if (dualPane) {
             Bundle arguments = new Bundle();
-            arguments.putInt("PostId", id);
+            arguments.putInt("PostIndex", id);
             PostDetailFragment fragment = new PostDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
@@ -277,7 +284,7 @@ public class Main extends AppCompatActivity implements PostListFragment.Callback
         }
         else{
             Intent postDetail = new Intent(Main.this, PostDetailActivity.class);
-            postDetail.putExtra("PostId", id);
+            postDetail.putExtra("PostIndex", id);
             Main.this.startActivity(postDetail);
         }
     }
@@ -286,7 +293,7 @@ public class Main extends AppCompatActivity implements PostListFragment.Callback
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if(fragmentUI != null){
-            outState.putInt("PostId", fragmentUI.getSelectedItem());
+            outState.putInt("PostIndex", fragmentUI.getSelectedItem());
         }
     }
 

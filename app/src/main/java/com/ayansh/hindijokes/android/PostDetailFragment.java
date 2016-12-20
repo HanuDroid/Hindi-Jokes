@@ -140,6 +140,7 @@ public class PostDetailFragment extends Fragment implements HanuFragmentInterfac
 	private void showPost() {
 
 		if(post == null){
+			wv.setVisibility(View.GONE);
 			return;
 		}
 

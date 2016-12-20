@@ -45,6 +45,7 @@ public class Eula extends Activity implements OnClickListener{
 		decline.setOnClickListener(this);
 
 		application = Application.getApplicationInstance();
+		application.setContext(getApplicationContext());
 		
 		// Read EULA text from the file.
 		readEULA(getResources());

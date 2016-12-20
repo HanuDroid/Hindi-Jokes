@@ -39,4 +39,8 @@
         android:title="Help">
     </item>
 
+    <item android:id="@+id/ShowEula"
+        android:title="Terms / Conditions">
+    </item>
+
 </menu>
