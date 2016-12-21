@@ -28,27 +28,25 @@ public class PostRating extends Activity implements RatingBar.OnRatingBarChangeL
         int postIndex = intent.getIntExtra("PostIndex", 0);
 
         try{
-            post = Application.getApplicationInstance().getPostList().get(postIndex);
+
+            Application app = Application.getApplicationInstance();
+            post = app.getPostList().get(postIndex);
+
+            setTitle("Rate this post:");
+
+            ratingBar = (RatingBar) findViewById(R.id.ratingbar);
+            ratingBar.setNumStars(5);
+            ratingBar.setRating(post.getMyRating());
+            ratingBar.setOnRatingBarChangeListener(this);
+
+            Bundle bundle = new Bundle();
+            bundle.putString("post_id", post.getTitle());
+            app.getFirebaseAnalytics().logEvent("post_rating", bundle);
+
         }catch (Exception e){
             Log.e(Application.TAG, e.getMessage(), e);
             finish();
         }
-
-        if(post == null){
-            finish();
-        }
-
-        setTitle("Rate this post:");
-
-        ratingBar = (RatingBar) findViewById(R.id.ratingbar);
-        ratingBar.setNumStars(5);
-        ratingBar.setRating(post.getMyRating());
-        ratingBar.setOnRatingBarChangeListener(this);
-
-        Bundle bundle = new Bundle();
-        bundle.putString("post_id", post.getTitle());
-        Application.getApplicationInstance().getFirebaseAnalytics().logEvent("post_rating", bundle);
-
     }
 
     @Override
