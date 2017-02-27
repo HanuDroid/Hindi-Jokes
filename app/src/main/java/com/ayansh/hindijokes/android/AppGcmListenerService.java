@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.NotificationCompat;
 
+import com.ayansh.CommandExecuter.Command;
 import com.ayansh.CommandExecuter.Invoker;
 import com.ayansh.CommandExecuter.ProgressInfo;
 import com.ayansh.CommandExecuter.ResultObject;
@@ -158,14 +159,7 @@ public class AppGcmListenerService extends HanuFCMMessagingService {
 
 	private void deleteOldPosts(){
 
-		DeleteOldPostsCommand command = new DeleteOldPostsCommand(new Invoker() {
-			@Override
-			public void NotifyCommandExecuted(ResultObject resultObject) {}
-
-			@Override
-			public void ProgressUpdate(ProgressInfo progressInfo) {}
-			});
-
+		DeleteOldPostsCommand command = new DeleteOldPostsCommand(Command.DUMMY_CALLER);
 		command.execute();
 	}
 }

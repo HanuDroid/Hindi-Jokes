@@ -24,6 +24,7 @@ import com.ayansh.hanudroid.HanuFragmentInterface;
 import com.ayansh.hanudroid.HanuGestureAnalyzer;
 import com.ayansh.hanudroid.HanuGestureListener;
 import com.ayansh.hanudroid.Post;
+import com.bumptech.glide.Glide;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -151,9 +152,10 @@ public class PostDetailFragment extends Fragment implements HanuFragmentInterfac
 				File image_folder = new File(app.getFilesDirectory(),String.valueOf(post.getId()));
 				File[] file_list = image_folder.listFiles();
 				File image_file = file_list[0];
-				Uri image_uri = Uri.fromFile(image_file);
 				wv.setVisibility(View.GONE);
-				iv.setImageURI(image_uri);
+				//iv.setImageURI(image_uri);
+				Glide.with(this).load(image_file).into(iv);
+
 			}
 			catch(Exception e){
 
