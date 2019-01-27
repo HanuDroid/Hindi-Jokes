@@ -3,7 +3,7 @@
     <string name="app_name">Hindi Jokes</string>
     <string name="title_activity_main">Hindi Jokes</string>
 
-    <string name="BlogURL">http://apps.ayansh.com/Hindi-Jokes</string>
+    <string name="BlogURL">https://apps.ayansh.com/Hindi-Jokes</string>
     <string name="GoogleAnalyticsPropertyId" tools:ignore="TypographyDashes">UA-52130169-10</string>
 
     <string name="loading">Loading....</string>
@@ -30,6 +30,7 @@
 
     <string name="title">Title goes here</string>
     <string name="submit">Submit</string>
+    <string name="accept">Accept</string>
     <string name="cancel">Cancel</string>
     <string name="nick_name">Name</string>
     <string name="content">Write Content here</string>
