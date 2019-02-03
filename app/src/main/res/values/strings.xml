@@ -35,4 +35,8 @@
     <string name="nick_name">Name</string>
     <string name="content">Write Content here</string>
 
+    <string name="washare_help">Share on Whats App</string>
+    <string name="share_help">Share Joke</string>
+    <string name="rate_help">Rate this Joke</string>
+
 </resources>

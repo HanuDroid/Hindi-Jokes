@@ -30,6 +30,8 @@
         android:background="@drawable/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingLeft="10sp"
+        android:paddingRight="10sp"
         android:layout_above="@id/adView" />
 
     <include layout="@layout/swipe_help"

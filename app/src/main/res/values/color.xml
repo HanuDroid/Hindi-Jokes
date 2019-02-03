@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPurple">#8E24AA</color>
+    <color name="colorIndigo">#3949AB</color>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorLime">#827717</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorBrown">#6D4C41</color>
+    <color name="colorGray">#757575</color>
+
     <color name="translucent_black">#a0000000</color>
+    <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
 </resources>

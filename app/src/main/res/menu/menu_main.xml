@@ -3,22 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Main">
 
-    <item android:icon="@mipmap/ic_share"
-        android:id="@+id/Share"
-        app:showAsAction="ifRoom"
-        android:title="Share">
-    </item>
-
     <item android:icon="@mipmap/add_content"
         android:id="@+id/Upload"
         app:showAsAction="ifRoom"
         android:title="Upload">
-    </item>
-
-    <item android:icon="@mipmap/ic_rate"
-        android:id="@+id/Rate"
-        app:showAsAction="ifRoom"
-        android:title="Rate this joke">
     </item>
 
     <item android:icon="@android:drawable/ic_menu_preferences"
