@@ -161,7 +161,6 @@ public class Main extends AppCompatActivity implements PostListFragment.Callback
             viewPager = (ViewPager) findViewById(R.id.post_pager);
 
             viewPager.setClipToPadding(false);
-            //viewPager.setPadding(80,0,80,0);
             viewPager.setPageMargin(-50);
 
             pagerAdapter = new PostPagerAdapter(getSupportFragmentManager(),app.getPostList().size());

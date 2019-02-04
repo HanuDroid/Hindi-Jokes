@@ -136,14 +136,24 @@ public class PostDetailFragment extends Fragment implements HanuFragmentInterfac
 		boolean isMeme = post.hasCategory("Meme");
 		if(isMeme){
 
-			tv_post_content.setVisibility(View.GONE);
-			imageView.setVisibility(View.VISIBLE);
 
-			File image_folder = new File(app.getFilesDirectory(),String.valueOf(post.getId()));
-			File[] file_list = image_folder.listFiles();
-			File image_file = file_list[0];
-			Uri uri = FileProvider.getUriForFile(getActivity(), getActivity().getPackageName(), image_file);
-			imageView.setImageURI(uri);
+			try{
+				File image_folder = new File(app.getFilesDirectory(),String.valueOf(post.getId()));
+				File[] file_list = image_folder.listFiles();
+				File image_file = file_list[0];
+				Uri image_uri = Uri.fromFile(image_file);
+
+				tv_post_content.setVisibility(View.GONE);
+				imageView.setVisibility(View.VISIBLE);
+				imageView.setImageURI(image_uri);
+			}
+			catch(Exception e){
+
+				imageView.setVisibility(View.GONE);
+				tv_post_content.setVisibility(View.VISIBLE);
+				tv_post_content.setText("\n\nCould not load image. Please inform developer about this\n\n");
+
+			}
 		}
 		else{
 			imageView.setVisibility(View.GONE);
