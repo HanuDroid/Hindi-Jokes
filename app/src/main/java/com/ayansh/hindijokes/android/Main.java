@@ -209,6 +209,11 @@ public class Main extends AppCompatActivity implements PostListFragment.Callback
                 Main.this.startActivity(info);
                 break;
 
+            case R.id.MyApps:
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/developer?id=Ayansh+TechnoSoft+Pvt.+Ltd"));
+                startActivity(browserIntent);
+                break;
+
             case R.id.Upload:
                 Intent upload = new Intent(Main.this, CreateNewPost.class);
                 Main.this.startActivity(upload);

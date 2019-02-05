@@ -9,6 +9,12 @@
         android:title="Upload">
     </item>
 
+    <item android:icon="@mipmap/my_apps"
+        android:id="@+id/MyApps"
+        app:showAsAction="ifRoom"
+        android:title="My Apps">
+    </item>
+
     <item android:icon="@android:drawable/ic_menu_preferences"
         android:id="@+id/Settings"
         app:showAsAction="ifRoom"

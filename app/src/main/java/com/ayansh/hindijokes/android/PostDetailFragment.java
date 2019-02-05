@@ -32,7 +32,6 @@ import java.util.Random;
 public class PostDetailFragment extends Fragment implements HanuFragmentInterface, View.OnClickListener{
 
 	private Post post;
-	private int position;
 	private Callbacks activity = sDummyCallbacks;
 	private Application app;
 	private int postIndex;
@@ -68,11 +67,11 @@ public class PostDetailFragment extends Fragment implements HanuFragmentInterfac
 		
 		if(getArguments() != null){
 			if (getArguments().containsKey("PostIndex")) {
-				int index = getArguments().getInt("PostIndex");
-	        	if(index >= app.getPostList().size()){
-	        		index = app.getPostList().size() - 1;
+				postIndex = getArguments().getInt("PostIndex");
+	        	if(postIndex >= app.getPostList().size()){
+					postIndex = app.getPostList().size() - 1;
 	        	}
-	            post = app.getPostList().get(index);
+	            post = app.getPostList().get(postIndex);
 	        }
 		}
 	}
@@ -201,7 +200,7 @@ public class PostDetailFragment extends Fragment implements HanuFragmentInterfac
 
 	@Override
 	public int getSelectedItem() {
-		return position;
+		return postIndex;
 	}
 
 	@Override
