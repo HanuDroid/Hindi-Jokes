@@ -24,6 +24,12 @@
     <string name="show_help_again">Don\'t show this again</string>
     <string name="ok_got_it">OK. Got it !</string>
 
+    <string name="preferences">Preferences</string>
+    <string name="help">Help</string>
+    <string name="about">About</string>
+    <string name="eula">Terms and Conditions</string>
+    <string name="myapps">Apps by Ayansh TechnoSoft</string>
+
     <string name="show_memes">Subscribe to Memes</string>
     <string name="show_memes_help">Memes are Jokes with Images.
         Memes will be deleted automatically after 7 days to optimize storage space</string>

@@ -60,22 +60,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".PostDetailActivity"
-            android:exported="false"
-            android:label="@string/app_name"
-            android:parentActivityName=".Main">
-
-            <!-- Parent activity meta-data to support 4.0 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Main" />
-
-            <intent-filter>
-                <action android:name="android.intent.action.POST_DETAIL" />
-            </intent-filter>
-        </activity>
-
         <activity android:name=".PostRating"
             android:theme="@android:style/Theme.Dialog"
             android:exported="false"

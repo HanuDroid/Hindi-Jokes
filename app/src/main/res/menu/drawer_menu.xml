@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="none"
+        android:id="@+id/main_actions">
+
+        <item
+            android:id="@+id/Settings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/preferences" >
+        </item>
+
+        <item
+            android:id="@+id/MyApps"
+            android:icon="@drawable/ic_my_apps"
+            android:title="@string/myapps" >
+        </item>
+
+    </group>
+
+    <group android:checkableBehavior="none"
+        android:id="@+id/additional_info">
+
+        <item
+            android:id="@+id/Help"
+            android:icon="@drawable/ic_help"
+            android:title="@string/help" >
+        </item>
+
+        <item
+            android:id="@+id/About"
+            android:icon="@drawable/ic_info"
+            android:title="@string/about" >
+        </item>
+
+        <item
+            android:id="@+id/ShowEula"
+            android:icon="@drawable/ic_eula"
+            android:title="@string/eula" >
+        </item>
+
+    </group>
+
+</menu>

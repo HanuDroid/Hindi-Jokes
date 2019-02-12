@@ -175,16 +175,6 @@ public class PostDetailFragment extends Fragment implements HanuFragmentInterfac
 
 		return rootView;
 	}
-	
-	@Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        if (!(activity instanceof Callbacks)) {
-            throw new IllegalStateException("Activity must implement fragment's callbacks.");
-        }
-
-        this.activity = (Callbacks) activity;
-    }
 
     @Override
     public void onDetach() {
