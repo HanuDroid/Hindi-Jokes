@@ -42,6 +42,7 @@
             android:layout_above="@id/adView" />
 
         <include layout="@layout/swipe_help"
+            android:visibility="gone"
             android:id="@+id/swipe_help" />
 
     </RelativeLayout>
@@ -54,6 +55,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:menu="@menu/drawer_menu"
+        app:itemTextColor="@color/black"
         app:headerLayout="@layout/nav_header" >
     </android.support.design.widget.NavigationView>
 

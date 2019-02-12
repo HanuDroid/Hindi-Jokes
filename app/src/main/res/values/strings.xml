@@ -24,6 +24,9 @@
     <string name="show_help_again">Don\'t show this again</string>
     <string name="ok_got_it">OK. Got it !</string>
 
+    <string name="all_posts">All Posts</string>
+    <string name="my_fav">My Favourites</string>
+    <string name="meme_posts">Image/Meme Posts</string>
     <string name="preferences">Preferences</string>
     <string name="help">Help</string>
     <string name="about">About</string>
@@ -44,5 +47,6 @@
     <string name="washare_help">Share on Whats App</string>
     <string name="share_help">Share Joke</string>
     <string name="rate_help">Rate this Joke</string>
+    <string name="fav_help">Mark this as Favourite</string>
 
 </resources>

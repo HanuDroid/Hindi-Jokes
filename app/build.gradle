@@ -8,8 +8,8 @@ android {
         applicationId "com.ayansh.hindijokes.android"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 34
-        versionName "3.0.4"
+        versionCode 35
+        versionName "3.0.5"
     }
     buildTypes {
         release {

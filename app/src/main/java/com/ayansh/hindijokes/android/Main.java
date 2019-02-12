@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +24,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.ayansh.hanudroid.Application;
 import com.ayansh.hanudroid.HanuFragmentInterface;
@@ -54,6 +56,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setCheckedItem(R.id.AllPosts);
         navigationView.setNavigationItemSelectedListener(this);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -75,45 +78,6 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
 
         // Start the Main Activity
         startMainScreen();
-
-        // Show Swipe Help
-        showSwipeHelp();
-
-    }
-
-    private void showSwipeHelp(){
-
-        final LinearLayout swipeHelpLayout = (LinearLayout) findViewById(R.id.swipe_help);
-
-        if(swipeHelpLayout == null){
-            return;
-        }
-
-        String swipeHelp = app.getOptions().get("SwipeHelp");
-
-        if(swipeHelp != null && swipeHelp.contentEquals("Skip")){
-            // Skip the swipe help
-            swipeHelpLayout.setVisibility(View.GONE);
-        }
-        else{
-
-            final CheckBox showHelpAgain = (CheckBox) swipeHelpLayout.findViewById(R.id.show_again);
-
-            Button dismissHelp = (Button) swipeHelpLayout.findViewById(R.id.dismiss_help);
-            dismissHelp.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View view) {
-                    // Hide the swipe help
-                    swipeHelpLayout.setVisibility(View.GONE);
-
-                    if(showHelpAgain.isChecked()){
-                        Application.getApplicationInstance().addParameter("SwipeHelp", "Skip");
-                    }
-                }
-            });
-
-        }
 
     }
 
@@ -191,6 +155,24 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
 
         switch (menuItem.getItemId()){
 
+            case R.id.AllPosts:
+                // Load Posts.
+                Application.getApplicationInstance().getAllPosts();
+                updateUI();
+                break;
+
+            case R.id.MyFavs:
+                // Load Posts.
+                Application.getApplicationInstance().getFavouritePosts();
+                updateUI();
+                break;
+
+            case R.id.MemePosts:
+                // Load Posts.
+                Application.getApplicationInstance().loadPostByCategory("Meme");
+                updateUI();
+                break;
+
             case R.id.Help:
                 Intent help = new Intent(Main.this, DisplayFile.class);
                 help.putExtra("File", "help.html");
@@ -224,5 +206,18 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         }
 
         return true;
+    }
+
+    private void updateUI(){
+
+        pagerAdapter.setNewSize(app.getPostList().size());
+        pagerAdapter.notifyDataSetChanged();
+        viewPager.setAdapter(pagerAdapter);
+        if(app.getPostList().size() < 1){
+            // Show warning
+            Toast toast = Toast.makeText(this,"Posts for selected criteria not found",Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER,0,0);
+            toast.show();
+        }
     }
 }

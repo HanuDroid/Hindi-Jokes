@@ -28,8 +28,8 @@ public class DeleteOldPostsCommand extends Command {
         List<Post> toDelete = new ArrayList<Post>();
         Iterator<Post> i;
         List<Post> postList;
-        long seven_days   =   7*24*60*60;
-        long hundred_days = 100*24*60*60;
+        long seven_days = 7*24*60*60;
+        long six_months = 180*24*60*60;
 
         String keep_old_jokes = app.getOptions().get("Keep_Old_Jokes");
         String keep_old_memes = app.getOptions().get("Keep_Old_Memes");
@@ -48,6 +48,10 @@ public class DeleteOldPostsCommand extends Command {
             Date pubDate = p.getPublishDate();
             long diff = today.getTime()/1000 - pubDate.getTime()/1000;
 
+            if(p.isFavourite() || p.getViewCount() < 2){
+                continue;
+            }
+
             if(p.hasCategory("Meme")){
 
                 if(keep_old_memes == null || keep_old_memes.contentEquals("")){
@@ -60,7 +64,7 @@ public class DeleteOldPostsCommand extends Command {
             else{
 
                 if(keep_old_jokes == null || keep_old_jokes.contentEquals("")){
-                    if(diff >= hundred_days){
+                    if(diff >= six_months){
                         // Collect into a delete list
                         toDelete.add(p);
                     }

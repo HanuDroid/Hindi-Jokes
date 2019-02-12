@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <group android:checkableBehavior="single"
+        android:id="@+id/selection_actions">
+
+        <item
+            android:id="@+id/AllPosts"
+            android:icon="@drawable/ic_inbox"
+            android:title="@string/all_posts" >
+        </item>
+
+        <item
+            android:id="@+id/MyFavs"
+            android:icon="@drawable/ic_favorite"
+            android:title="@string/my_fav" >
+        </item>
+
+        <item
+            android:id="@+id/MemePosts"
+            android:icon="@drawable/ic_image"
+            android:title="@string/meme_posts" >
+        </item>
+
+    </group>
+
     <group android:checkableBehavior="none"
         android:id="@+id/main_actions">
 
