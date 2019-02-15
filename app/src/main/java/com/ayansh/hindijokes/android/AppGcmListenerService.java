@@ -3,6 +3,8 @@ package com.ayansh.hindijokes.android;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
@@ -153,6 +155,20 @@ public class AppGcmListenerService extends HanuFCMMessagingService {
 
 		nm.notify(1, notification);
 
+		// Update Widget also
+		triggerWidgetUpdate();
+
+	}
+
+	private void triggerWidgetUpdate() {
+
+		// Broadcast intent to update widget
+		AppWidgetManager widgetManager = AppWidgetManager.getInstance(getApplicationContext());
+		int[] appWidgetIds = widgetManager.getAppWidgetIds(new ComponentName(this, HJAppWidgetProvider.class));
+
+		Intent brIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+		brIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+		sendBroadcast(brIntent);
 	}
 
 	private void deleteOldPosts(){

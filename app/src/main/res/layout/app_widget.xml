@@ -1,0 +1,32 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/widget_rl"
+    android:background="@drawable/widget_border"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/post_content"
+        android:text="@string/show_memes_help"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8sp"
+        android:layout_gravity="fill"
+        android:textColor="@color/black"
+        android:scrollbars="vertical"
+        app:autoSizeTextType="uniform"
+        app:autoSizeMinTextSize="14sp"
+        app:autoSizeMaxTextSize="28sp" >
+    </TextView>
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_alignParentTop="true"
+        android:visibility="gone"
+        android:contentDescription="@string/app_name"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

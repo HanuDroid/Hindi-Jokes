@@ -168,7 +168,7 @@ public class PostDetailFragment extends Fragment implements HanuFragmentInterfac
 				post = Application.getApplicationInstance().getPostList().get(0);
 			}
 			if(post != null){
-				post.incrementViewCount();
+				post.incrementViewCount(1);
 			}
 		}
 	}
