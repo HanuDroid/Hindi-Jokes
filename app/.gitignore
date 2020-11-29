@@ -1,1 +1,4 @@
 /build
+
+# Dont commit following files
+google-services.json

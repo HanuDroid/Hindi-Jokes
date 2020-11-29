@@ -39,3 +39,6 @@ proguard/
 
 #IML Files
 *.iml
+
+# 
+app/google-services.json
