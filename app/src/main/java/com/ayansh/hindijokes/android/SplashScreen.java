@@ -11,7 +11,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
+import androidx.core.app.NotificationCompat;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.TextView;
@@ -77,8 +77,8 @@ public class SplashScreen extends Activity implements Invoker {
 	private void startMainActivity() {
 		
 		// Register application.
-		String regStatus = (String) app.getOptions().get("RegistrationStatus");
-		String regId = (String) app.getOptions().get("RegistrationId");
+		String regStatus = (String) app.readParameterValue("RegistrationStatus");
+		String regId = (String) app.readParameterValue("RegistrationId");
 
 		if(regId != null && !regId.contentEquals("")) {
 

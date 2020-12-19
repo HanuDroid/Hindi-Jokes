@@ -2,13 +2,12 @@ package com.ayansh.hindijokes.android;
 
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.ShareCompat;
-import android.support.v4.content.FileProvider;
+import androidx.fragment.app.Fragment;
+import androidx.core.app.ShareCompat;
+import androidx.core.content.FileProvider;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;

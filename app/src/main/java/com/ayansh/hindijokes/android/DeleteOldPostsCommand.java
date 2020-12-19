@@ -31,8 +31,8 @@ public class DeleteOldPostsCommand extends Command {
         long seven_days = 7*24*60*60;
         long six_months = 180*24*60*60;
 
-        String keep_old_jokes = app.getOptions().get("Keep_Old_Jokes");
-        String keep_old_memes = app.getOptions().get("Keep_Old_Memes");
+        String keep_old_jokes = app.readParameterValue("Keep_Old_Jokes");
+        String keep_old_memes = app.readParameterValue("Keep_Old_Memes");
 
         postList = app.getAllPosts();
 

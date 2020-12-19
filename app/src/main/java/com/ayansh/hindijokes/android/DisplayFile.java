@@ -8,14 +8,13 @@ import java.io.InputStreamReader;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.webkit.JavascriptInterface;
@@ -24,8 +23,6 @@ import android.webkit.WebView;
 import android.widget.Toast;
 
 import com.ayansh.hanudroid.Application;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 
 public class DisplayFile extends AppCompatActivity {
@@ -193,12 +190,12 @@ public class DisplayFile extends AppCompatActivity {
 		
 		@JavascriptInterface
 		public String getParameterValue(String paramName){
-			return Application.getApplicationInstance().getOptions().get(paramName);
+			return Application.getApplicationInstance().readParameterValue(paramName);
 		}
 		
 		@JavascriptInterface
 		public void verifyPassword(String pwd){
-			if(app.getOptions().get("password").contentEquals(pwd)){
+			if(app.readParameterValue("password").contentEquals(pwd)){
 				setResult(RESULT_OK);
 				finish();
 			}
