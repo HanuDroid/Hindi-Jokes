@@ -2,10 +2,9 @@
 .idea/*
 .idea/*.*
 .DS_Store
-/build
+#/build
 app/build
 app/app.iml
-*.gradle
 gradle*
 
 # Built application files
@@ -25,7 +24,7 @@ gen/
 # Gradle files
 .gradle/
 build/
-/*/build/
+#/*/build/
 
 # Local configuration file (sdk path, etc)
 local.properties
